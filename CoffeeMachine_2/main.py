@@ -50,11 +50,11 @@ def process_coins(product="espresso"):
         return False
 
 
-status = "ON"
-status = input("What would you like? (espresso/latte/cappuccino):\n").upper()
+selection = "ON"
+selection = input("What would you like? (espresso/latte/cappuccino):\n").upper()
 
-while not status == "OFF":
-    match status:
+while not selection == "OFF":
+    match selection:
         case "REPORT":
             report_print(WATER, MILK, COFFEE, MONEY)
         case "ESPRESSO":
@@ -86,7 +86,7 @@ while not status == "OFF":
                             MONEY += float(data.MENU["cappuccino"]["cost"])
         case _:
             print("Code not found")
-    status = input("What would you like? (espresso/latte/cappuccino):\n").upper()
+    selection = input("What would you like? (espresso/latte/cappuccino):\n").upper()
 
 print("Thank you, machine going Off")
 
