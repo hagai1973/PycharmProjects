@@ -22,24 +22,6 @@ def is_resource_sufficient(order_ingredients):
     return True
 
 
-def check_sufficient(product="espresso", resource="water"):
-    amount = int(data.MENU["" + product + ""]["ingredients"]["" + resource + ""])
-    match resource:
-        case "water":
-            if WATER < amount:
-                print(f"Sorry there is not enough {resource}.")
-                return False
-        case "coffee":
-            if COFFEE < amount:
-                print(f"Sorry there is not enough {resource}.")
-                return False
-        case "milk":
-            if MILK < amount:
-                print(f"Sorry there is not enough {resource}.")
-                return False
-    return True
-
-
 def process_coins(product="espresso"):
     print("Please insert coins.")
     quarters = int(input("how many quarters? \n"))
