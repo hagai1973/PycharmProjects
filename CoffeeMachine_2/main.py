@@ -1,17 +1,25 @@
 import data
 from data import MENU
 
-WATER = 300
-MILK = 200
-COFFEE = 100
+resources = {"water": 300, "milk": 200, "coffee": 100}
+
 MONEY = 0.0
 
 
-def report_print(water, milk, coffee, money):
-    print(f"Water: {water}ml")
-    print(f"Milk: {milk}ml")
-    print(f"Coffee: {coffee}g")
-    print(f"Money: ${money}")
+def report_print():
+    print(f"Water: {resources['water']}ml")
+    print(f"Milk: {resources['milk']}ml")
+    print(f"Coffee: {resources['coffee']}g")
+    print(f"Money: ${MONEY}")
+
+
+def is_resource_sufficient(order_ingredients):
+    print(order_ingredients)
+    for item in order_ingredients:
+        if order_ingredients[item] > resources[item]:
+            print(f"Sorry there is not enough {item} ")
+            return False
+    return True
 
 
 def check_sufficient(product="espresso", resource="water"):
@@ -44,10 +52,18 @@ def process_coins(product="espresso"):
         if total_paid > price:
             refund = round(total_paid - price, 2)
             print(f"Here is ${refund} dollars in change.")
+        global MONEY
+        MONEY += price
         return True
     else:
         print(f"Sorry that's not enough money. Money refunded, needed: {price} , paid: {total_paid}")
         return False
+
+
+def make_coffee(drink_name, order_ingredients):
+    print(f"Here is your {drink_name} ☕ Enjoy👍")
+    for item in order_ingredients:
+        resources[item] -= order_ingredients[item]
 
 
 selection = "ON"
@@ -56,38 +72,24 @@ selection = input("What would you like? (espresso/latte/cappuccino):\n").upper()
 while not selection == "OFF":
     match selection:
         case "REPORT":
-            report_print(WATER, MILK, COFFEE, MONEY)
+            report_print()
         case "ESPRESSO":
-            if check_sufficient("espresso", "water"):
-                if check_sufficient("espresso", "coffee"):
-                    if process_coins("espresso"):
-                        print("Here is your espresso ☕ Enjoy👍")
-                        WATER -= int(data.MENU["espresso"]["ingredients"]["water"])
-                        COFFEE -= int(data.MENU["espresso"]["ingredients"]["coffee"])
-                        MONEY += float(data.MENU["espresso"]["cost"])
+            print(data.MENU["espresso"])
+            if is_resource_sufficient(data.MENU["espresso"]["ingredients"]):
+                if process_coins("espresso"):
+                    make_coffee("espresso", data.MENU["espresso"]["ingredients"])
         case "LATTE":
-            if check_sufficient("latte", "water"):
-                if check_sufficient("latte", "coffee"):
-                    if check_sufficient("latte", "milk"):
-                        if process_coins("latte"):
-                            print("Here is your latte ☕ Enjoy👍")
-                            WATER -= int(data.MENU["latte"]["ingredients"]["water"])
-                            MILK -= int(data.MENU["latte"]["ingredients"]["milk"])
-                            COFFEE -= int(data.MENU["latte"]["ingredients"]["coffee"])
-                            MONEY += float(data.MENU["latte"]["cost"])
+            print(data.MENU["latte"])
+            if is_resource_sufficient(data.MENU["latte"]["ingredients"]):
+                if process_coins("latte"):
+                    make_coffee("latte", data.MENU["latte"]["ingredients"])
         case "CAPPUCCINO":
-            if check_sufficient("cappuccino", "water"):
-                if check_sufficient("cappuccino", "coffee"):
-                    if check_sufficient("cappuccino", "milk"):
-                        if process_coins("cappuccino"):
-                            print("Here is your cappuccino ☕ Enjoy👍")
-                            WATER -= int(data.MENU["cappuccino"]["ingredients"]["water"])
-                            MILK -= int(data.MENU["cappuccino"]["ingredients"]["coffee"])
-                            MONEY += float(data.MENU["cappuccino"]["cost"])
+            print(data.MENU["cappuccino"])
+            if is_resource_sufficient(data.MENU["cappuccino"]["ingredients"]):
+                if process_coins("cappuccino"):
+                    make_coffee("cappuccino", data.MENU["cappuccino"]["ingredients"])
         case _:
             print("Code not found")
     selection = input("What would you like? (espresso/latte/cappuccino):\n").upper()
 
 print("Thank you, machine going Off")
-
-
