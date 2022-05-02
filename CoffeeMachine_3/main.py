@@ -10,6 +10,8 @@ selection = "ON"
 options = menu.get_items()
 
 selection = input(f"What would you like? ({options}):\n").lower()
+cost = float(menu.find_drink(selection).cost)
+print(f"Selection dring cost: {cost}")
 
 while not selection == "off":
     match selection:
