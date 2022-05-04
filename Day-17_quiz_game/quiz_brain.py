@@ -16,10 +16,10 @@ class QuizBrain:
         if self.q_number == len(self.q_list) - 1:
             greating = "Quiz completed"
         if self.next_question(self.q_list[self.q_number]):
-            print(f"Good job, your score is: {self.score}/{len(self.q_list)}, {greating}")
+            print(f"Good job, your score is: {self.score}/{self.q_number}, {greating}")
             # return True
         else:
-            print(f"Wrong answer...your score is: {self.score}/{len(self.q_list)}, lets continue")
+            print(f"Wrong answer...your score is: {self.score}/{self.q_number}, {greating}")
             # return False
         print("\n")
 
