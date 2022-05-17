@@ -18,6 +18,7 @@ class Snake:
             new_segment.color("white")
             new_segment.penup()
             new_segment.goto(postion)
+            new_segment.speed("fastest")
             self.segments.append(new_segment)
 
     def move(self):
