@@ -16,9 +16,9 @@ class Food(Turtle):
 
     def create_food(self):
         self.penup()
-        self.shape("circle")
+        self.shape("turtle")
         self.shapesize(0.5, 0.5, 0)
-        self.color("blue")
+        self.color("yellow")
         self.speed("fastest")
         self.refresh()
 

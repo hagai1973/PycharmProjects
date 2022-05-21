@@ -9,8 +9,10 @@ class Snake:
 
     def __init__(self):
         self.segments = []
+        self.move_speed = 0
         self.create_snake()
         self.head = self.segments[0]
+        self.last = self.segments[-1]
 
     def create_snake(self):
         for postion in LOCATION_START:
@@ -18,8 +20,15 @@ class Snake:
             new_segment.color("white")
             new_segment.penup()
             new_segment.goto(postion)
-            new_segment.speed("fastest")
+            new_segment.speed(self.move_speed)
             self.segments.append(new_segment)
+
+    def append_snake(self):
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(self.last.position())
+        self.segments.append(new_segment)
 
     def move(self):
         for item in range(len(self.segments) - 1, 0, -1):
