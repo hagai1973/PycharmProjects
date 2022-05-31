@@ -8,10 +8,6 @@ class Paddle(Turtle):
 
     def __init__(self, x_cor):
         super().__init__()
-        self.create_paddle(x_cor)
-
-    def create_paddle(self, x_cor):
-        # Right paddle
         self.speed(0)
         self.shape("square")
         self.color("white")
