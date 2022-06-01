@@ -2,17 +2,11 @@ from turtle import Screen
 from turtle import Turtle
 import time
 
-MOVE_DISTANCE = 20
-
 
 class HitBall(Turtle):
 
     def __init__(self):
         super().__init__()
-        self.is_bounce_up = False
-        self.is_bounce_bottom = True
-        self.is_bounce_right = False
-        self.is_bounce_left = False
         self.x_move = 10
         self.y_move = 10
         self.speed(40)
