@@ -6,6 +6,7 @@ from player import Player
 from car_manager import CarManager
 from scoreboard import Scoreboard
 
+START_NUMBER_OF_CARS = 5
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
@@ -21,7 +22,7 @@ game_is_on = True
 cars_1 = list()
 cars_2 = list()
 
-for x in range(5):
+for x in range(START_NUMBER_OF_CARS):
     cars_1.append(CarManager(screen))
 
 while game_is_on:
@@ -34,11 +35,10 @@ while game_is_on:
         cars_1.append(CarManager(screen))
         scoreboard.update_score()
     for car in cars_1:
-        if player.distance(car) < 50:
+        if player.distance(car) < 35:
             player.turtle_reset()
             game_is_on = False
             scoreboard.game_over()
-    time.sleep(0)
     screen.update()
 
 screen.exitonclick()

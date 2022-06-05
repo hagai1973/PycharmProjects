@@ -12,6 +12,7 @@ class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
+        self.penup()
         self.create_scoreboard()
 
     def create_scoreboard(self):
@@ -24,7 +25,7 @@ class Scoreboard(Turtle):
     def update_score(self):
         self.clear()
         self.goto(0, 260)
-        self.write(f"Score: " + str(self.score), True, align=ALIGN, font=(FONT, FONT_SIZE, STYLE))
+        self.write(f"Level: " + str(self.score), True, align=ALIGN, font=(FONT, FONT_SIZE, STYLE))
 
     def add_score(self):
         self.score += 1
@@ -33,6 +34,6 @@ class Scoreboard(Turtle):
     def game_over(self):
         self.clear()
         self.goto(0, 260)
-        self.write(f"Final Score: " + str(self.score), True, align=ALIGN, font=(FONT, FONT_SIZE, STYLE))
+        self.write(f"Final Level: " + str(self.score), True, align=ALIGN, font=(FONT, FONT_SIZE, STYLE))
         self.goto(0, 0)
         self.write(f" Game Over ", True, align=ALIGN, font=(FONT, FONT_SIZE, STYLE))

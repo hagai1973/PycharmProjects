@@ -12,10 +12,11 @@ class CarManager(Turtle):
 
     def __init__(self, screen):
         super().__init__()
+        self.sleep_time = 0.09
         self.speed(0)
         self.shape("square")
         self.color(random.choice(COLORS))
-        self.shapesize(stretch_wid=1, stretch_len=3)
+        self.shapesize(stretch_wid=1, stretch_len=2)
         self.penup()
         self.starting = STARTING_MOVE_DISTANCE
         self.goto(random.randint(280, 300), random.randint(-230, 260))
@@ -27,10 +28,10 @@ class CarManager(Turtle):
             self.goto(new_x, self.ycor())
             self.starting += MOVE_INCREMENT
             screen.update()
-            time.sleep(0.09)
-        else:
+            time.sleep(self.sleep_time)
+        else:  # Begin again the car ride
             self.color(random.choice(COLORS))
             self.goto(random.randint(285, 300), random.randint(-220, 260))
             self.starting = STARTING_MOVE_DISTANCE
-            time.sleep(0.09)
+            # self.sleep_time -= 0.01
             screen.update()
