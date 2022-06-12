@@ -32,13 +32,16 @@ while game_is_on:
         food.refresh()
         scoreboard.add_score()
         snake.append_snake()
-        if game_speed > 0.2:
-            game_speed -= 0.1
+        if game_speed > 0.1:
+            game_speed *= 0.9
 
     # Detected collision
     if snake.head.xcor() > 299 or snake.head.xcor() < -299 or snake.head.ycor() > 299 or snake.head.ycor() < -299:
-        game_is_on = False
-        scoreboard.game_over()
+        # game_is_on = False
+        scoreboard.reset()
+        snake.reset()
+        game_speed = 0.5
+        # scoreboard.game_over()
 
     # Detect collision with tail
     # if head collides with any segment of sanke
@@ -46,8 +49,12 @@ while game_is_on:
     index = 0
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
-            game_is_on = False
-            scoreboard.game_over()
+            # game_is_on = False
+            # scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
+            game_speed = 0.5
             break
+
 
 screen.exitonclick()

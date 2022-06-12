@@ -20,7 +20,7 @@ class Snake:
             new_segment.color("white")
             new_segment.penup()
             new_segment.goto(postion)
-            new_segment.speed(self.move_speed)
+            new_segment.speed(0)
             self.segments.append(new_segment)
 
     def append_snake(self):
@@ -52,3 +52,10 @@ class Snake:
     def down(self):
         if not self.head.heading() == 90:
             self.head.setheading(270)
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
