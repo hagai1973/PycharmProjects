@@ -13,7 +13,7 @@ import pandas
 #
 # print (temperatures)
 
-data = pandas.read_csv("weather_data.csv")
+
 # print(data.condition)
 # print(data[data.condition == "Sunny"])
 # print(data[data.temp == data.temp.max()])
@@ -39,15 +39,34 @@ data = pandas.read_csv("weather_data.csv")
 # print(f"Average temp is: {average}")
 # print(f"max temp is: {max_temp}")
 
-
 # print(type(data))
 # print(type(data["temp"]))
 
+# data_dic = {
+#     "student": ["Amy", "James", "Angela"],
+#     "scores": [76, 56, 65]
+# }
+#
+# data = pandas.DataFrame(data_dic)
+# print(data)
+# data.to_csv("grades.csv")
+
+data = pandas.read_csv("2018_Central_Park.csv")
+Gray = data[data['Primary Fur Color'] == "Gray"]
+Red = data[data['Primary Fur Color'] == "Cinnamon"]
+Black = data[data['Primary Fur Color'] == "Black"]
+
+
+print(f"Gray: {len(Gray)}")
+print(f"Red: {len(Red)}")
+print(f"Black: {len(Black)}")
+
 data_dic = {
-    "student": ["Amy", "James", "Angela"],
-    "scores": [76, 56, 65]
-}
+     "color": ["Gray", "Red", "Black"],
+     "total": [len(Gray), len(Red), len(Black)]
+ }
 
 data = pandas.DataFrame(data_dic)
-print(data)
-data.to_csv("grades.csv")
+data.to_csv("total.csv")
+
+# print(f"Total grey are: {total_gray}")
