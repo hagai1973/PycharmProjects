@@ -29,17 +29,20 @@ while scoreboard.attempts > 0:
 
     answer_state = screen.textinput(title=f"{total_possible} / {len(guessed_states)} states correct",
                                     prompt="What is another state name?: ")
-    state_data = data[data['state'] == answer_state.title()]
 
     if answer_state.title() == "Exit":
-        for state in all_states:
-            if not (state in guessed_states):
-                not_guessed_states.append(state)
-        df = pandas.DataFrame(not_guessed_states, columns=["state"])
+        not_guessed_states_new = [state for state in all_states if state not in guessed_states]
+
+        # for state in all_states:
+        #     if not (state in guessed_states):
+        #         not_guessed_states.append(state)
+
+        df = pandas.DataFrame(not_guessed_states_new, columns=["state"])
         df.to_csv("not_guessed_states.csv")
         break
 
-    if len(state_data) == 1:
+    state_data = data[data['state'] == answer_state.title()]
+    if answer_state.title() in all_states:
         guessed_states.append(answer_state.capitalize())
         # print(int(state_data.x))
         # print(int(state_data.y))
