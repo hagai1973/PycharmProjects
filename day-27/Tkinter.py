@@ -19,7 +19,7 @@ window.config(padx=20, pady=20)
 
 # Entry
 my_input = Entry(width=10)
-print(my_input.get())
+# print(my_input.get())
 my_input.grid(column=1, row=0)
 
 # Label
