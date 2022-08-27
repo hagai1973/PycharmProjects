@@ -8,37 +8,62 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 1
+WORK_MIN = 3
+LONG_BREAK_MIN = 2
 SHORT_BREAK_MIN = 1
-LONG_BREAK_MIN = 1
 REPS = 0
+CM = 0
+timer = None
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def reset_timer():
+    window.after_cancel(timer)
+    canvas.itemconfig(timer_text, text="00:00")
+    check_marks.config(text="", fg=GREEN, font=(FONT_NAME, 12, "bold"), bg=YELLOW)
+    title_label.config(text="Timer", fg=RED, font=(FONT_NAME, 45, "bold"), bg=YELLOW)
+    global REPS
+    global CM
+    REPS = 0
+    CM = 0
+
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
     global REPS
+    global CM
+    cm_str = ""
     REPS += 1
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
+
+    i = 0
+    while i < CM:
+        cm_str += "✔"
+        i += 1
+    check_marks.config(text=cm_str, fg=GREEN, font=(FONT_NAME, 12, "bold"), bg=YELLOW)
+
     if REPS % 2 == 0 and REPS < 8:
         count_down(short_break_sec)
-        title_label.config(text="Break", fg=PINK, font=(FONT_NAME, 45, "bold"), bg=YELLOW)
+        title_label.config(text="Break(s)", fg=PINK, font=(FONT_NAME, 45, "bold"), bg=YELLOW)
     elif REPS % 2 != 0:
         count_down(work_sec)
         title_label.config(text="Work", fg=GREEN, font=(FONT_NAME, 45, "bold"), bg=YELLOW)
+        CM += 1
+
+
     else:
         count_down(long_break_sec)
-        title_label.config(text="Break", fg=RED, font=(FONT_NAME, 45, "bold"), bg=YELLOW)
+        title_label.config(text="Break(l)", fg=RED, font=(FONT_NAME, 45, "bold"), bg=YELLOW)
 
     if REPS > 8:
         REPS = 0
 
 
-def reset_timer():
-    count_down(0)
+
+
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -49,7 +74,8 @@ def count_down(count):
         count_sec = f"0{count_sec}"
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count >= 0:
-        window.after(100, count_down, count - 1)
+        global timer
+        timer = window.after(100, count_down, count - 1)
     else:
         start_timer()
 
@@ -80,7 +106,7 @@ button_Reset = Button(text="Reset", fg="#31087B", font=(FONT_NAME, 12, "bold"), 
                       command=reset_timer)
 button_Reset.grid(column=2, row=2)
 
-check_marks = Label(text="✔", fg=GREEN, font=(FONT_NAME, 12, "bold"), bg=YELLOW)
+check_marks = Label(text="", fg=GREEN, font=(FONT_NAME, 12, "bold"), bg=YELLOW)
 check_marks.grid(column=1, row=3)
 
 # Keep window open
