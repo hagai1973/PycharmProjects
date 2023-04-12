@@ -5,8 +5,9 @@ def make_pie(index):
     try:
         fruit = fruits[index]
     except IndexError:
-        fruit = "Fruit"
-    print(fruit + " pie")
+        print("Fruit pie")
+    else:
+        print(fruit + " pie")
 
 
-make_pie(-500)
+make_pie(1)
